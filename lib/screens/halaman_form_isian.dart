@@ -181,8 +181,20 @@ class _HalamanFormIsianState extends State<HalamanFormIsian> {
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 5),
-                child: Text(
-                    '${index + 1}. ${kerabatList[index].nama} (${kerabatList[index].status})'),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                          '${index + 1}. ${kerabatList[index].nama} (${kerabatList[index].status})'),
+                    ),
+                    GestureDetector(
+                        onTap: () {
+                          kerabatList.remove(kerabatList[index]);
+                          setState(() {});
+                        },
+                        child: const Icon(Icons.close))
+                  ],
+                ),
               );
             },
             primary: false,
