@@ -1,0 +1,3 @@
+void regusterWebViewWebImplementation() {
+  // No-op.
+}
