@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:fe_pawartos_lelayu/data/general_controller.dart';
 import 'package:fe_pawartos_lelayu/data/generate_controller.dart';
+import 'package:fe_pawartos_lelayu/screens/preview_hasil_generate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/instance_manager.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../models/data_pawartos.dart';
@@ -34,6 +36,7 @@ class _HalamanFormIsianState extends State<HalamanFormIsian> {
   final controllerKuburTabuh = TextEditingController(text: '');
   final controllerKuburWonten = TextEditingController(text: 'Makam');
   final controllerGenerator = Get.find<GenerateController>();
+  final controllerGeneral = Get.find<GeneralController>();
 
   @override
   void initState() {
@@ -253,6 +256,13 @@ class _HalamanFormIsianState extends State<HalamanFormIsian> {
                 sedoWonten: controllerSedoWonten.text,
               );
               await controllerGenerator.generateDocx(jsonEncode(dataPawartos));
+              if (controllerGeneral.isMobile.value) {
+                Get.dialog(
+                  const Dialog(
+                    child: PreviewHasilGenerate(),
+                  ),
+                );
+              }
             },
             child: const Text(
               'GENERATE PAWARTOS',

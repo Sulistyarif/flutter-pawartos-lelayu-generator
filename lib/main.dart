@@ -1,4 +1,6 @@
+import 'package:fe_pawartos_lelayu/data/general_controller.dart';
 import 'package:fe_pawartos_lelayu/data/generate_controller.dart';
+import 'package:fe_pawartos_lelayu/mobile_view/screens/container_halaman_utama_mobile.dart';
 import 'package:fe_pawartos_lelayu/screens/container_halaman_utama.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
@@ -13,14 +15,23 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
   Widget build(BuildContext context) {
     Get.put(GenerateController());
-    return const GetMaterialApp(
-      home: ContainerHalamanUtama(),
+    final controllerGeneral = Get.put(GeneralController());
+    controllerGeneral.isMobile.value = MediaQuery.of(context).size.width < 600;
+    return GetMaterialApp(
+      home: controllerGeneral.isMobile.value
+          ? const ContainerHalamanUtamaMobile()
+          : const ContainerHalamanUtama(),
     );
   }
 }

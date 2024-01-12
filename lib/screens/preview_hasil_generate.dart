@@ -17,14 +17,6 @@ class _PreviewHasilGenerateState extends State<PreviewHasilGenerate> {
   final controllerGenerator = Get.find<GenerateController>();
 
   @override
-  void initState() {
-    // controller = WebViewController()
-    //   ..loadRequest(Uri.parse(
-    //       'https://view.officeapps.live.com/op/embed.aspx?src=${Konstanta.baseUrl}/${controllerGenerator.summarizeText.value}'));
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() {
